@@ -2,4 +2,4 @@ deprecatedFiles/
 logs/
 .log
 validation.html
-dbModel
+dbModel*
