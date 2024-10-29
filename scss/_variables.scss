@@ -1,0 +1,42 @@
+// Fonts import
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Bebas+Neue&family=Roboto+Mono:ital,wght@0,600;1,600&family=Roboto:wght@400;700&display=swap');
+
+// Colors
+$backgroundColor: #0e131f;
+$primaryColor: #192338;
+$alternativeColor: #028090;
+$textColor: #ecfff8;
+$titleColor: #00bfb2;
+$shadowColor: #587b7f;
+
+// Fonts
+%titleFont {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+%textFont {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+%boldFont {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+%servicesTitleFont {
+    font-family: "Audiowide", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+%servicesTextFont {
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
