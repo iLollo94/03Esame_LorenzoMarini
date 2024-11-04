@@ -20,6 +20,14 @@ $shadowColor: #587b7f;
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-style: normal;
+
+    @media all and (max-width:800px) {
+        font-size: 0.9em;
+    }
+
+    @media all and (max-width:600px) {
+        font-size: 0.8em;
+    }
 }
 
 %boldFont {
@@ -32,6 +40,11 @@ $shadowColor: #587b7f;
     font-family: "Audiowide", sans-serif;
     font-weight: 400;
     font-style: normal;
+    font-size: 2.5em;
+
+    @media all and (max-width:800px) {
+        font-size: 1em;
+    }
 }
 
 %servicesTextFont {
@@ -39,4 +52,9 @@ $shadowColor: #587b7f;
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
+    font-size: 1.5em;
+
+    @media all and (max-width:800px) {
+        font-size: 1em;
+    }
 }

@@ -10,7 +10,6 @@ const nextBtn = document.querySelector('span#next');
 // Params
 const n_slides = slides.length;
 const n_slidesCloned = 1; // For infinite scroll
-let slideWidth = slides[0].offsetWidth;
 let spaceBtwSlides = Number(window.getComputedStyle(slideWrapper).getPropertyValue('column-gap').slice(0, -2)); // slice to remove 'px' at the end
 /**
  * Function to compute the index of the slide shown
@@ -18,18 +17,22 @@ let spaceBtwSlides = Number(window.getComputedStyle(slideWrapper).getPropertyVal
  * and activate the correct span.dot
 */
 const index_slideCurrent = () => {
+    let slideWidth = slides[0].offsetWidth;
+
     return Math.round(slideWrapper.scrollLeft / (slideWidth + spaceBtwSlides) - n_slidesCloned);
 }
 
 // Nav dot click handler and prev/next buttons click handler
 const goto = (index) => {
+    let slideWidth = slides[0].offsetWidth;
+
     slideWrapper.scrollTo((slideWidth + spaceBtwSlides) * (index + n_slidesCloned), 0);
 }
 const next = () => {
-    goto(index_slideCurrent()+1);
+    goto(index_slideCurrent() + 1);
 }
 const prev = () => {
-    goto(index_slideCurrent()-1)
+    goto(index_slideCurrent() - 1)
 }
 for (let i = 0; i < n_slides; i++) {
     navdots[i].addEventListener('click', () => goto(i));
@@ -55,6 +58,8 @@ const updateNavdot = () => {
 let scrollTimer;
 
 slideWrapper.addEventListener('scroll', () => {
+    let slideWidth = slides[0].offsetWidth;
+
     // Reset navdot mark
     navdots.forEach(navdot => {
         navdot.classList.remove('active');
@@ -78,16 +83,17 @@ slideWrapper.addEventListener('scroll', () => {
 // Update elements sizes as the browser window gets resized
 let resizeTimer;
 window.addEventListener('resize', () => {
-    let slideWidth = slides[0].offsetWidth;
-    let spaceBtwSlides = Number(window.getComputedStyle(slideWrapper).getPropertyValue('column-gap').slice(0, -2)); // slice to remove 'px' at the end
+    // let slideWidth = slides[0].offsetWidth;
 
     if (resizeTimer) {
-        clearInterval(resizeTimer);
+        clearTimeout(resizeTimer);
     }
     stop();
     resizeTimer = setTimeout(() => {
         play();
     }, 400);
+
+    // markNavdot(index_slideCurrent());
 });
 
 // INFINITE SCROLLING
@@ -99,6 +105,8 @@ slideWrapper.prepend(lastSlideClone);
 
 // Instant rewind and forward scroll (achieved removing and adding again the smooth scroll behaviour to the wrapper)
 const rewind = () => {
+    let slideWidth = slides[0].offsetWidth;
+
     slideWrapper.classList.remove('smooth-scroll');
     setTimeout(() => { // Wait for smooth scroll to be removed
         slideWrapper.scrollTo((slideWidth + spaceBtwSlides) * n_slidesCloned, 0);
@@ -106,6 +114,8 @@ const rewind = () => {
     }, 100);
 }
 const forward = () => {
+    let slideWidth = slides[0].offsetWidth;
+
     slideWrapper.classList.remove('smooth-scroll');
     setTimeout(() => { // Wait for smooth scroll to be removed
         slideWrapper.scrollTo((slideWidth + spaceBtwSlides) * (n_slides - 1 + n_slidesCloned), 0);
@@ -137,7 +147,7 @@ const callback = (entries, observer) => {
         }
     })
 }
-const observer = new IntersectionObserver(callback, {threshold: 0.9});
+const observer = new IntersectionObserver(callback, { threshold: 0.99 });
 observer.observe(carouselContainer);
 // Mouse user events
 carouselContainer.addEventListener('pointerenter', stop);
@@ -154,7 +164,7 @@ carouselContainer.addEventListener('blur', () => {
 carouselContainer.addEventListener('touchstart', stop);
 
 // Init
-// goto(0);
+goto(0);
 markNavdot(0);
 slideWrapper.classList.add('smooth-scroll');
 

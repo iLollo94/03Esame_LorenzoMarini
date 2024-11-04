@@ -1,0 +1,326 @@
+@import 'variables.scss';
+
+main {
+    width: min(100%, 1400px);
+    margin: auto;
+
+    section.portfolio {
+        padding: 50px;
+
+        // Portfolio title and filter-select
+        div.portfolio-top-line {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+
+            select {
+                padding: 3px;
+                margin-left: 10px;
+                background-color: $primaryColor;
+                color: $textColor;
+            }
+        }
+
+        // Project cards container
+        div.portfolio-container {
+            padding: 30px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            align-content: space-around;
+            gap: 20px;
+
+            // Project cards
+            div.project-card {
+                width: 300px;
+                aspect-ratio: 6/7;
+                padding: 10px;
+                border: 2px solid $alternativeColor;
+                box-shadow: 2px 2px 20px $shadowColor;
+                border-radius: 20px;
+
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: stretch;
+                align-items: center;
+                position: relative;
+
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.1);
+                    transition: .2s ease-out;
+                }
+
+                div.project-image {
+                    width: 100%;
+                    aspect-ratio: 3/2;
+                    margin: auto;
+                    border-radius: 10px;
+                    overflow: hidden;
+                    margin-bottom: 10px;
+                    background-position: center;
+                    background-size: cover;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                div.project-description {
+                    width: 100%;
+                    flex-grow: 1;
+                    display: flex;
+                    flex-flow: column nowrap;
+
+                    h3 {
+                        margin: 0 0 10px 10px;
+                    }
+
+                    p.project-text {
+                        margin-bottom: 20px;
+                    }
+
+                    p.project-type {
+                        margin-top: auto;
+                        font-size: 0.8em;
+                        text-decoration: underline;
+                    }
+                }
+
+                div.project-date {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    padding: 10px;
+
+                    p {
+                        font-size: 0.8em;
+                        font-style: italic;
+                    }
+                }
+            }
+        }
+
+        // Fixed project details background
+        div.project-preview-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100dvw;
+            height: 100dvh;
+            background-color: rgba($primaryColor, $alpha: 0.8);
+            z-index: 3;
+            padding: 100px;
+
+            // Project details box
+            div.project-preview-container {
+                width: 100%;
+                height: 100%;
+                background-color: $backgroundColor;
+                z-index: inherit;
+                padding: 30px;
+                border-radius: 30px;
+                overflow-y: auto;
+                scrollbar-width: none; // Hide scrollbar for FF and CHROME
+
+                &::-webkit-scrollbar {
+                    display: none; // Hide scrollbar for SAFARI and old CHROME
+                }
+
+                div.title-bar {
+                    h1 {
+                        font-size: 2.5em;
+                    }
+                }
+
+                /* Slideshow container */
+                div.project-gallery {
+                    width: 50%;
+                    position: relative;
+                    margin: auto;
+                    padding-bottom: 60px;
+
+                    div.project-gallery-container {
+                        display: flex;
+                        column-gap: 20px;
+                        overflow: auto; // To hide overflowing slides with a scrollbar
+                        scroll-snap-type: x mandatory; // CSS Scroll snap
+                        scrollbar-width: none; // Hide scrollbar for FF and CHROME
+
+                        &.smooth-scroll {
+                            scroll-behavior: smooth;
+                        }
+
+                        &::-webkit-scrollbar {
+                            display: none; // Hide scrollbar for SAFARI and old CHROME
+                        }
+
+                        width: 100%;
+
+                        div.image-container {
+                            flex: 0 0 auto; // To fix slides width
+                            scroll-snap-align: center; // CSS Scroll snap
+                            width: 100%;
+
+                            /* Fading animation */
+                            &.fade {
+                                animation-name: fade;
+                                animation-duration: 1.5s;
+                            }
+
+                            /* Animation */
+                            @keyframes fade {
+                                from {
+                                    opacity: .4;
+                                    position: relative;
+                                    right: 1000px;
+                                }
+
+                                to {
+                                    opacity: 1;
+                                    position: relative;
+                                    right: 0;
+                                }
+                            }
+
+                            /* Slides style */
+                            display: flex;
+                            flex-flow: column nowrap;
+                            padding: 20px;
+
+                            div.image {
+                                margin: auto;
+                                width: 80%;
+                                aspect-ratio: 4/3;
+                                background-position: center;
+                                background-size: cover;
+                            }
+
+                            div.description {
+                                margin-top: 10px;
+                                text-align: center;
+
+                                p {
+                                    @extend %servicesTextFont;
+                                }
+                            }
+                        }
+
+                    }
+
+                    /* Dot indicators */
+                    div.dot-container {
+                        display: flex;
+                        justify-content: center;
+                        column-gap: 10px;
+
+                        span.dot {
+                            cursor: pointer;
+                            height: 15px;
+                            width: 15px;
+                            background-color: $shadowColor;
+                            border-radius: 50%;
+                            display: inline-block;
+                            transition: background-color .6s ease;
+
+                            &.active,
+                            &:hover {
+                                background-color: $alternativeColor;
+                            }
+                        }
+
+                    }
+
+
+                    /* Previous and next buttons  */
+                    &>span {
+                        cursor: pointer;
+                        position: absolute;
+                        top: 50%;
+                        width: auto;
+                        margin-top: -22px;
+                        padding: 16px;
+                        color: $shadowColor;
+                        font-weight: bold;
+                        font-size: 18px;
+                        transition: .6s ease;
+                        border-radius: 50% 0 0 50%;
+                        user-select: none;
+
+                        &#prev {
+                            transform: translate(-100%, 0);
+                        }
+
+                        &#next {
+                            transform: translate(100%, 0);
+                            right: 0;
+                            border-radius: 0 50% 50% 0;
+                        }
+
+                        &:hover {
+                            background-color: $alternativeColor;
+                        }
+                    }
+                }
+
+                div.project-description {
+                    margin: 0 10px;
+
+                    p {
+                        margin: 10px 0 20px 20px;
+                    }
+                }
+            }
+
+            // Project details close button
+            div.project-details-close {
+                position: absolute;
+                top: 100px;
+                right: 100px;
+                z-index: 4;
+                background-color: $alternativeColor;
+                color: $textColor;
+                border-radius: 50%;
+                transform: translate(50%, -50%);
+
+                width: 40px;
+                height: 40px;
+                
+                a#project-details-close-button {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    font-size: 40px;
+                    line-height: 40px;
+                    text-align: center;
+                }
+            }
+
+            // Media queries
+            @media all and (max-width:1024px) {
+                padding: 60px;
+
+                div.portfolio-container {
+                    padding: 10px;
+
+                    div.project-card {
+                        width: 250px;
+                    }
+                }
+            }
+
+            @media all and (max-width:800px) {
+                padding: 30px;
+            }
+        }
+
+        @media all and (max-width:600px) {
+            div.portfolio-top-line {
+                flex-flow: column wrap;
+            }
+        }
+    }
+}
