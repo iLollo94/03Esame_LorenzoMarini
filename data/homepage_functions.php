@@ -30,7 +30,7 @@ function printServices()
         $count = 0;
         while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
             $count++;
-            $str .= sprintf('<div class="services-item service-' . $count . ' fade"><div class="description"><h2>%s</h2><p>%s</p></div><div class="image" style="background-image:url(%s);"></div></div>', $row['titolo'], $row['descrizione'], $row['urlImmagine']);
+            $str .= sprintf('<div class="services-item service-' . $count . '"><div class="description"><h2>%s</h2><p>%s</p></div><div class="image" style="background-image:url(%s);"></div></div>', $row['titolo'], $row['descrizione'], $row['urlImmagine']);
         }
         $str .= '</div>';
         // Using $count to print as many dots as the number of slides

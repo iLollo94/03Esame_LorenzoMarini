@@ -37,27 +37,6 @@ main {
                     scroll-snap-align: center; // CSS Scroll snap
                     width: 100%;
 
-                    /* Fading animation */
-                    &.fade {
-                        animation-name: fade;
-                        animation-duration: 1.5s;
-                    }
-
-                    /* Animation */
-                    @keyframes fade {
-                        from {
-                            opacity: .4;
-                            position: relative;
-                            right: 1000px;
-                        }
-
-                        to {
-                            opacity: 1;
-                            position: relative;
-                            right: 0;
-                        }
-                    }
-
                     /* Slides style */
                     display: flex;
                     flex-flow: row nowrap;

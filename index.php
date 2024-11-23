@@ -54,7 +54,8 @@ switch (UT::richiestaHTTP('page')) {
         echo printPortfolio();
         break;
     case 'contacts':
-
+        require_once('./data/contacts_functions.php');
+        echo printContacts();
         break;
     case 'privacy':
 
@@ -68,6 +69,7 @@ switch (UT::richiestaHTTP('page')) {
         break;
 }
 
+// Footer
 echo printFooter();
 
 // HTML end-page

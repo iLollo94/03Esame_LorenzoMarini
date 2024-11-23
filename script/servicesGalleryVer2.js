@@ -141,7 +141,7 @@ const stop = () => {
 const callback = (entries, observer) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
-            play();
+            play();            
         } else {
             stop();
         }
@@ -165,6 +165,5 @@ carouselContainer.addEventListener('touchstart', stop);
 
 // Init
 goto(0);
-markNavdot(0);
+markNavdot(index_slideCurrent());
 slideWrapper.classList.add('smooth-scroll');
-

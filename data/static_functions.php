@@ -148,7 +148,7 @@ function printMenu()
                     recapitiIndirizzi
                  WHERE
                     cancellato = 0
-                    AND tipo = "Socials"';
+                    AND sezione = "Socials"';
 
     $query = $pdo->prepare($queryStr);
     $query->execute();
@@ -210,7 +210,7 @@ function printFooter()
                     recapitiIndirizzi
                  WHERE
                     cancellato = 0
-                    AND tipo = "Contatti"';
+                    AND sezione = "Contatti"';
 
     $query = $pdo->prepare($queryStr);
     $query->execute();
@@ -233,7 +233,7 @@ function printFooter()
                     recapitiIndirizzi
                  WHERE
                     cancellato = 0
-                    AND tipo = "Socials"';
+                    AND sezione = "Socials"';
 
     $query = $pdo->prepare($queryStr);
     $query->execute();
